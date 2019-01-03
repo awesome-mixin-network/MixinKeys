@@ -1,4 +1,14 @@
 # MixinKeys
+# Requirements
+- Composer
+- PHP >= 7.0
+- Install MixinSDK by comand: composer require exinone/mixin-sdk-php -vvv
+- Arduino UNO 
+- ESP wi-fi module
+- Bluetooth module 
+- Mixin Messenger account
+- Mobile app for bluetooth connection
+
 # INTRODUCTION
 Nowadays many people like to travel. During the trip, there is a need for rental housing. If you are traveling in a large company or for a long time, then choosing between the hotel and the apartment, the choice will fall on the apartment. At a price, the cost of daily rent of apartments is similar or cheaper than a hotel room of the appropriate level. The difference in price can reach 20-30%. In addition, at the disposal of a tourist or a business traveler who has arrived in the city for several days, there is a fully equipped kitchen where you can prepare lunch or dinner on your own. And when placed in a hotel, you will have to either leave a lot of money in a restaurant each time, or look for a decent cafe or restaurant. And it is not the fact that a decent institution will be nearby. The hotel will have to pay for each additional service - washing and ironing a shirt, taking care of shoes, etc. In the same apartment for rent, nobody will present an additional bill for using an iron, a washing machine or a brush for shoes.
 Services helping to rent housing are profitable. Even despite such problems as the introduction in some cities, for example in New York and San Francisco, of legislative norms restricting the operation of these services, Airbnb's annual revenue in 2016 grew by 80%. 
