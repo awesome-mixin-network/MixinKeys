@@ -1,4 +1,5 @@
 # MixinKeys
+Airbnb style DApp for Mixin Network
 # Requirements
 - Composer
 - PHP >= 7.0
@@ -8,6 +9,30 @@
 - Bluetooth module 
 - Mixin Messenger account
 - Mobile app for bluetooth connection
+
+# How to testing service
+You can test live demo: (http://mixinkeys.ibisolutions.ru)
+<br>To simplify the testing process we temporarily turned off the processing of data about houses and their owners. In first page you can see enter form:
+<br><img height="400" src="screens/enter1.jpg" alt="enter screen" title="enter screen"></img> 
+<img height="400" src="screens/enter2.jpg" alt="enter screen" title="enter screen"></img><br>
+You can enter to your account (link "enter to my account") or fill form and enter for booking.<br>
+You can choose country and date, but at the moment for demonstration we enabling all houses and they are the same in all countries. The owner of this houses - Mixin Messenger user Mi A2 Lite (37229842). 
+<br>After that you must authenticate with Mixin Messenger and you will be redirect to booking page or to account page
+<br><img height="400" src="screens/auth.jpg" alt="auth screen" title="auth screen"></img>
+<img height="400" src="screens/houses.jpg" alt="booking page screen" title="booking page screen"></img>
+<img height="400" src="screens/acc.jpg" alt="account page screen" title="account page screen"></img><br>
+For booking you need press enabled button like this:<br>
+<img height="400" src="screens/en_house.jpg" alt="enable house screen" title="enable house screen"></img><br>
+And you will be redirect to your account page for confirm and pay:<br>
+<img height="400" src="screens/pay.jpg" alt="pay screen" title="pay screen"></img>
+<img height="400" src="screens/success1.jpg" alt="success pay screen" title="success pay screen"></img><br>
+For generate transaction we use MixinSDK on PHP (https://github.com/ExinOne/mixin-sdk-php), so we have all functionality of Mixin Network, but now for test we can do only empty transactions, because we don't have permissions to get money by the testing period.<br>
+Next, we can generate password (now it is default "11111111") for unlock house. You needn't to auth as Mi A2 Lite, for testing period we enable generation function for any user. You can "confirm and send code" by yourself and receive message in Mixin Messenger:<br>
+<img height="400" src="screens/code.jpg" alt="code screen" title="code screen"></img>
+<img height="400" src="screens/success2.jpg" alt="success code screen" title="success code screen"></img>
+<img height="400" src="screens/message.jpg" alt="message screen" title="message screen"></img><br>
+For testing smart lock you need arduino microcontroller (we used UNO), esp8266, bluetooth module and servo. You can use another controller, if you want. Live demo with controller you can see on youtube (https://youtu.be/TyIUbuKu_OY) and vimeo(https://vimeo.com/309406253). <br>
+At first stage of development we focused more attention on integration service with Mixin Network (learn how to use Mixin API, develop concept of service for using Mixin API), integration service with IoT (develop simple prototype of SmartLock), develop simple website for demonstration and connect all these parts together. We didn't focuse on implementation full airbnb functionality (create/delete houses, filter enable houses by date and country, cancel of booking etc) because this implementation is much  simpler than what is described above, so we wanna fix it on next stage. 
 
 # INTRODUCTION
 Nowadays many people like to travel. During the trip, there is a need for rental housing. If you are traveling in a large company or for a long time, then choosing between the hotel and the apartment, the choice will fall on the apartment. At a price, the cost of daily rent of apartments is similar or cheaper than a hotel room of the appropriate level. The difference in price can reach 20-30%. In addition, at the disposal of a tourist or a business traveler who has arrived in the city for several days, there is a fully equipped kitchen where you can prepare lunch or dinner on your own. And when placed in a hotel, you will have to either leave a lot of money in a restaurant each time, or look for a decent cafe or restaurant. And it is not the fact that a decent institution will be nearby. The hotel will have to pay for each additional service - washing and ironing a shirt, taking care of shoes, etc. In the same apartment for rent, nobody will present an additional bill for using an iron, a washing machine or a brush for shoes.
@@ -47,7 +72,12 @@ For communication between the tenant and the arduino the HC-06 bluetooth module
 On the side of a managed device, such as an Arduino, this module looks like a normal serial interface. With the HC-06, you can control various devices directly from your smartphone by putting one of numerous control programs on your phone or tablet.
 The operating voltage of this bluetooth module is 3.3 V, but its inputs are tolerant to 5 V, so it is compatible with all Arduino boards.
 Arduino UNO was chosen because of its versatility, low cost, as well as the possibility of easy and rapid expansion of the functional. Bluetooth module HC-06 and wi-fi module esp8266 were chosen because they are easily integrated into the system with Arduino and the servo drive was chosen to create a lock opening mechanism.
-Connecting all parts to one server
+
+# Smart lock variants
+1. Arduino + bluetooth (landlord must program arduino by himself near the house)
+2. Arduino + bluetooth + wi-fi (landlord can program arduino througth the website from everywhere - <b>we choose this method</b>)
+3. Arduino + keypad (simply method to create smart lock, but not convenient and safety)
+4. Another method, which you enjoy:) 
 
 # Connecting all parts to one server
 To work with a ready server, you will need to go to the site and select the housing you like. The site will transfer to mixin messenger, which, when paid, will create a transaction containing the password and time of arrival and departure, which will be communicated to the Arduino using the wi-fi module. Arduino will process the received data and program the lock. Upon arrival, the tenant will install any application that allows you to communicate with arduino Bluetooth and dial a password. This scheme is presented in the form of Figure 1.
