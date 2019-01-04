@@ -39,6 +39,12 @@ if ($result === FALSE) {
 curl_close($ch);
 $array_mix = json_decode($result);
 
+//$assetId = '43d61dcd-e413-450d-80b8-101d5e903357';
+//$opponentId = '3c4c9673-2c0a-4547-bfd0-c1ea66e43634';
+//$pin = '563613';
+//$amount = 0.00000001;
+//$mixinSdk->use('myConfig-A')->wallet()->transfer($assetId, $opponentId, $pin, $amount, '', null);
+
 ?>
 
 <!DOCTYPE html>
