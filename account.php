@@ -41,6 +41,12 @@ if ($result === FALSE) {
 }
 curl_close($ch);
 $array_mix = json_decode($result);
+if (!isset($_SESSION['full_name'])) {
+  $_SESSION['user_id'] = $array_mix->data->user_id;
+  $_SESSION['full_name'] = $array_mix->data->full_name;
+}
+$u_name = $_SESSION['full_name']; 
+$u_id = $_SESSION['user_id'];
 ?>
 
 <!DOCTYPE html>
@@ -59,16 +65,16 @@ $array_mix = json_decode($result);
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
-  <link href="../assets/css/material-kit.css?v=2.0.5" rel="stylesheet" />
+  <link href="assets/css/material-kit.css?v=2.0.5" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="../assets/demo/demo.css" rel="stylesheet" />
+  <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 
 <body class="profile-page sidebar-collapse">
   <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="https://demos.creative-tim.com/material-kit/index.html">
+        <a class="navbar-brand" href="#">
           MixinKeys </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="sr-only">Toggle navigation</span>
@@ -80,35 +86,35 @@ $array_mix = json_decode($result);
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a href="houses.php" class="nav-link" data-toggle="dropdown">
+            <a href="http://mixinkeys.ibisolutions.ru" class="nav-link" data-toggle="dropdown">
               <i class="material-icons">home</i> Search house
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)" onclick="scrollToDownload()">
+            <a class="nav-link" target="_blank" href="https://github.com/if1242/MixinKeys/blob/master/MixinKeys%20-%20white%20paper.pdf">
               <i class="material-icons">cloud_download</i> White paper
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank" data-original-title="Follow us on github">
-              <i class="fa fa-twitter"></i>
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://github.com/if1242/MixinKeys" target="_blank" data-original-title="Follow us on github">
+              <i class="fa fa-github"></i>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/CreativeTim" target="_blank" data-original-title="Like us on youtube">
-              <i class="fa fa-facebook-square"></i>
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://youtu.be/TyIUbuKu_OY" target="_blank" data-original-title="Like us on youtube">
+              <i class="fa fa-youtube-play"></i>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com/CreativeTimOfficial" target="_blank" data-original-title="Vimeo">
-              <i class="fa fa-instagram"></i>
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://vimeo.com/309406253" target="_blank" data-original-title="Vimeo">
+              <i class="fa fa-vimeo"></i>
             </a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  <div class="page-header header-filter" data-parallax="true" style="background-image: url('assets/img/city-profile.jpg');"></div>
+  <div class="page-header header-filter" data-parallax="true" style="background-image: url('assets/img/account.jpg');"></div>
   <div class="main main-raised">
     <div class="profile-content">
       <div class="container">
@@ -116,7 +122,7 @@ $array_mix = json_decode($result);
           <div class="col-md-6 ml-auto mr-auto">
             <div class="profile">
               <div class="name">
-                <h3 class="title" style="color:#fff;">Hello, <?php echo $array_mix->data->full_name;?></h3>
+                <h3 class="title" style="color:#fff;">Hello, <?php echo $u_name; ?></h3>
               </div>
             </div>
           </div>
@@ -162,7 +168,7 @@ $array_mix = json_decode($result);
                     <p class="card-text">Comfortable option for traveling alone. Large double bed, kitchen, Wi-Fi - all this will be at your disposal. There are many shops near the house.</p>
                     <a href="sussess-guest.php">
 					<button type="submit" class="btn btn-primary btn-raised">
-                      Confirm and pay Mi A2 Lite
+                      Confirm and pay Mi A2 Lite (DEMO)
                     </button>
 					</a>
                   </div>
@@ -179,10 +185,10 @@ $array_mix = json_decode($result);
                     <h4 class="card-title">Nevsky Prospect, 34</h4>
                     <p class="card-text">Comfortable option for traveling alone. Large double bed, kitchen, Wi-Fi - all this will be at your disposal. There are many shops near the house.</p>
                     <button type="submit" class="btn btn-primary btn-raised">
-                      Delete
+                      Delete (off) 
                     </button>
 					<button type="submit" class="btn btn-primary btn-raised">
-                      Add new
+                      Add new (off)
                     </button>
                   </div>
                 </div>
@@ -192,7 +198,7 @@ $array_mix = json_decode($result);
 		  <?php if ($person == 1) {?>
 		  <div class="tab-pane active text-center gallery" id="orders">
 		  <?php } else { ?>
-		  <div class="tab-pane active text-center gallery" id="orders">
+		  <div class="tab-pane text-center gallery" id="orders">
 		  <?php } ?>
             <div class="row">
               <div class="col-md-3 mr-auto">
@@ -203,7 +209,7 @@ $array_mix = json_decode($result);
                     <p class="card-text">Comfortable option for traveling alone. Large double bed, kitchen, Wi-Fi - all this will be at your disposal. There are many shops near the house.</p>
                     <a href="sussess-acc.php">
 					<button type="submit" class="btn btn-primary btn-raised">
-                      Сonfirm and send code to Ivan
+                      Сonfirm and send code to <?php echo $u_name; ?>
                     </button>
 					</a>
                   </div>
@@ -227,18 +233,18 @@ $array_mix = json_decode($result);
     </div>
   </footer>
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/jquery.min.js" type="text/javascript"></script>
-  <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
-  <script src="../assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
-  <script src="../assets/js/plugins/moment.min.js"></script>
+  <script src="assets/js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+  <script src="assets/js/plugins/moment.min.js"></script>
   <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
-  <script src="../assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+  <script src="assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
   <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <script src="../assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+  <script src="assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
   <!--  Google Maps Plugin    -->
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/material-kit.js?v=2.0.5" type="text/javascript"></script>
+  <script src="assets/js/material-kit.js?v=2.0.5" type="text/javascript"></script>
 </body>
 
 </html>

@@ -6,7 +6,6 @@ $person = $_SESSION['person'];
 $url = 'https://api.mixin.one/oauth/token';
 $data = array('client_id' => '4d64a975-897f-4609-a67d-a1a976f3211a', 'code' => $mixin_code, 'client_secret' => '08f78877b91dd76537db8e2beb13195be2c8394adcfdc17d7c6ee450a72789de');
 
-
 $options = array(
   'http' => array(
     'method'  => 'POST',
@@ -20,8 +19,6 @@ $context  = stream_context_create( $options );
 $result = file_get_contents( $url, false, $context );
 $response = json_decode( $result );
 $access_token = $response->data->access_token;
-
-//echo $access_token ;
 
 $url = 'https://api.mixin.one/me';
 $headers = array(
@@ -41,6 +38,7 @@ if ($result === FALSE) {
 }
 curl_close($ch);
 $array_mix = json_decode($result);
+
 ?>
 
 <!DOCTYPE html>
@@ -48,8 +46,8 @@ $array_mix = json_decode($result);
 
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
     MixinKeys
@@ -59,16 +57,16 @@ $array_mix = json_decode($result);
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
-  <link href="../assets/css/material-kit.css?v=2.0.5" rel="stylesheet" />
+  <link href="assets/css/material-kit.css?v=2.0.5" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="../assets/demo/demo.css" rel="stylesheet" />
+  <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 
 <body class="profile-page sidebar-collapse">
   <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="https://demos.creative-tim.com/material-kit/index.html">
+        <a class="navbar-brand" href="#">
           MixinKeys </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="sr-only">Toggle navigation</span>
@@ -85,30 +83,30 @@ $array_mix = json_decode($result);
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)" onclick="scrollToDownload()">
+            <a class="nav-link" target="_blank" href="https://github.com/if1242/MixinKeys/blob/master/MixinKeys%20-%20white%20paper.pdf">
               <i class="material-icons">cloud_download</i> White paper
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank" data-original-title="Follow us on github">
-              <i class="fa fa-twitter"></i>
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://github.com/if1242/MixinKeys" target="_blank" data-original-title="Follow us on github">
+              <i class="fa fa-github"></i>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/CreativeTim" target="_blank" data-original-title="Like us on youtube">
-              <i class="fa fa-facebook-square"></i>
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://youtu.be/TyIUbuKu_OY" target="_blank" data-original-title="Like us on youtube">
+              <i class="fa fa-youtube-play"></i>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com/CreativeTimOfficial" target="_blank" data-original-title="Vimeo">
-              <i class="fa fa-instagram"></i>
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://vimeo.com/309406253" target="_blank" data-original-title="Vimeo">
+              <i class="fa fa-vimeo"></i>
             </a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  <div class="page-header header-filter" data-parallax="true" style="background-image: url('assets/img/city-profile.jpg');"></div>
+  <div class="page-header header-filter" data-parallax="true" style="background-image: url('assets/img/account.jpg');"></div>
   <div class="main main-raised">
     <div class="profile-content">
       <div class="container">
@@ -147,18 +145,18 @@ $array_mix = json_decode($result);
     </div>
   </footer>
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/jquery.min.js" type="text/javascript"></script>
-  <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
-  <script src="../assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
-  <script src="../assets/js/plugins/moment.min.js"></script>
+  <script src="assets/js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+  <script src="assets/js/plugins/moment.min.js"></script>
   <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
-  <script src="../assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+  <script src="assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
   <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <script src="../assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+  <script src="assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
   <!--  Google Maps Plugin    -->
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/material-kit.js?v=2.0.5" type="text/javascript"></script>
+  <script src="assets/js/material-kit.js?v=2.0.5" type="text/javascript"></script>
 </body>
 
 </html>

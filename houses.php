@@ -1,19 +1,19 @@
 <?php
 include("db.php"); //соединение с SQL
 $country = $_SESSION['country'];
-$result = $db->query("SELECT * 
+$result1 = $db->query("SELECT country 
                         FROM houses WHERE country = '$country'");
+$result2 = $db->query("SELECT country 
+                          FROM sessions");
 
+$row = $result2->fetch(PDO::FETCH_ASSOC);
+$location = $row['country'];
 $query = "UPDATE
                 sessions
              SET
                 state = 0
 ";
- 
 $db->query($query);
-
-
-						
 ?>
 
 <!DOCTYPE html>
@@ -21,8 +21,8 @@ $db->query($query);
 
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
     MixinKeys
@@ -41,7 +41,7 @@ $db->query($query);
   <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="https://demos.creative-tim.com/material-kit/index.html">
+        <a class="navbar-brand" href="#">
           MixinKeys </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="sr-only">Toggle navigation</span>
@@ -58,22 +58,22 @@ $db->query($query);
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)" onclick="scrollToDownload()">
+            <a class="nav-link" target="_blank" href="https://github.com/if1242/MixinKeys/blob/master/MixinKeys%20-%20white%20paper.pdf">
               <i class="material-icons">cloud_download</i> White paper
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank" data-original-title="Follow us on github">
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://github.com/if1242/MixinKeys" target="_blank" data-original-title="Follow us on github">
               <i class="fa fa-github"></i>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/CreativeTim" target="_blank" data-original-title="Like us on youtube">
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://youtu.be/TyIUbuKu_OY" target="_blank" data-original-title="Like us on youtube">
               <i class="fa fa-youtube-play"></i>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com/CreativeTimOfficial" target="_blank" data-original-title="Vimeo">
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://vimeo.com/309406253" target="_blank" data-original-title="Vimeo">
               <i class="fa fa-vimeo"></i>
             </a>
           </li>
@@ -81,7 +81,18 @@ $db->query($query);
       </div>
     </div>
   </nav>
+  <?php if ($location == 1) { ?>
   <div class="page-header header-filter" data-parallax="true" style="background-image: url('assets/img/city-profile.jpg');"></div>
+  <?php } ?>
+  <?php if ($location == 2) { ?>
+  <div class="page-header header-filter" data-parallax="true" style="background-image: url('assets/img/city-profile1.jpg');"></div>
+  <?php } ?>
+  <?php if ($location == 3) { ?>
+  <div class="page-header header-filter" data-parallax="true" style="background-image: url('assets/img/city-profile2.jpg');"></div>
+  <?php } ?>
+  <?php if ($location == 4) { ?>
+  <div class="page-header header-filter" data-parallax="true" style="background-image: url('assets/img/city-profile3.jpg');"></div>
+  <?php } ?>
   <div class="main main-raised">
     <div class="profile-content">
       <div class="container">
@@ -89,7 +100,18 @@ $db->query($query);
           <div class="col-md-6 ml-auto mr-auto">
             <div class="profile">
               <div class="name">
+                <?php if ($location == 1) { ?>
                 <h3 class="title" style="color:#fff;">Booking in Russia</h3>
+                <?php } ?>
+                <?php if ($location == 2) { ?>
+                <h3 class="title" style="color:#fff;">Booking in China</h3>
+                <?php } ?>
+                <?php if ($location == 3) { ?>
+                <h3 class="title" style="color:#fff;">Booking in USA</h3>
+                <?php } ?>
+                <?php if ($location == 4) { ?>
+                <h3 class="title" style="color:#fff;">Booking in Italy</h3>
+                <?php } ?>
               </div>
             </div>
           </div>
@@ -108,7 +130,7 @@ $db->query($query);
                     <p class="card-description"> <?php echo $country; ?>Cheap accommodation. With you will live another 6 people. In the room shower, TV, kitchen, Wi-Fi. There are many shops near the house.</p>
                   </div>
                   <button type="submit" class="btn btn-primary btn-raised">
-                    Book (1XIN per day)
+                    Book (1XIN per day) DEMO DISABLE
                   </button>       
                 </div>
               </div>
@@ -124,7 +146,7 @@ $db->query($query);
                   </div>
 				  <a href="account.php">
                   <button type="submit" class="btn btn-primary btn-raised">
-                    Book (5XIN per day)
+                    Book (5XIN per day) DEMO ENABLE
                   </button>
 				  </a>
                 </div>
@@ -143,7 +165,7 @@ $db->query($query);
                   </div>
 				  
                   <button type="submit" class="btn btn-primary btn-raised">
-                    Book (10XIN per day)
+                    Book (10XIN per day) DEMO DISABLE
                   </button>
                 </div>
               </div>

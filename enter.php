@@ -10,14 +10,15 @@ foreach($_SESSION['ERRMSG'] as $msg) {//распознавание каждой 
 	unset($_SESSION['ERRMSG']); //удаление сессии
 }
 
-$_SESSION['country'] = $_POST['country'];
+$_SESSION['country'] = $_POST['place'];
 $_SESSION['checkin'] = $_POST['checkin'];
 $_SESSION['checkout'] = $_POST['checkout'];
-
+$country = $_SESSION['country']; 
 $query = "UPDATE
                 sessions
              SET
-                state = 1
+                state = 1,
+                country = '$country'
 ";
 
 $db->query($query);

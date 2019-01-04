@@ -6,7 +6,7 @@ $result = $db->query("SELECT state
 $row = $result->fetch(PDO::FETCH_ASSOC);
 $state = $row['state'];
 $_SESSION['code'] = $_GET['code'];
-$mixin_code = $_SESSION['code'];
+/*$mixin_code = $_SESSION['code'];
 $url = 'https://api.mixin.one/oauth/token';
 $data = array('client_id' => '4d64a975-897f-4609-a67d-a1a976f3211a', 'code' => $mixin_code, 'client_secret' => '08f78877b91dd76537db8e2beb13195be2c8394adcfdc17d7c6ee450a72789de');
 
@@ -47,16 +47,16 @@ if ($result === FALSE) {
 }
 curl_close($ch);
 $array_mix = json_decode($result);
+*/
 
 
 
 
-
-//if ($state == 1) {
-//	$_SESSION['person'] = 0;
-//	header('Location: houses.php');
-//} else {
-//	$_SESSION['person'] = 1;
-//	header('Location: account.php');
-//}
+if ($state == 1) {
+	$_SESSION['person'] = 0;
+	header('Location: houses.php');
+} else {
+	$_SESSION['person'] = 1;
+	header('Location: account.php');
+}
 ?>

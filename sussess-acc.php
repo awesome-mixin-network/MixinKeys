@@ -1,6 +1,34 @@
 <?php
+require_once 'vendor/autoload.php';
 session_start();
 include("db.php"); //соединение с SQL
+use ExinOne\MixinSDK\MixinSDK;
+// Configuration file format
+$config0 = array(
+    'mixin_id'      => '7000101690',
+    'client_id'     => '4d64a975-897f-4609-a67d-a1a976f3211a',
+    'client_secret' => '08f78877b91dd76537db8e2beb13195be2c8394adcfdc17d7c6ee450a72789de',
+    'pin'           => '563613',
+    'pin_token'     => 'mQMvkCd4hJyQTZt2FVyQ/IiGQWt++Znp0ufsdhDrsE1u6jU0eZQGxXO56vqs67dVsGQ7boP7aJspoZ4aPYMvsC9yhyYx5XzhDS9jlTtM04Ww7rDEAyA9APmLt5a0CUZIozz0bUUXwlsFC3wS1tWgz3enkkOiYrgcJkX6KLvLJEE=',
+    'session_id'    => 'ee0fcec8-01eb-44f4-b49d-24926d60fdc5',
+    'private_key'   => '-----BEGIN RSA PRIVATE KEY-----
+MIICXAIBAAKBgQDhZj2zktkgRycLztfDmgTju4ZvzLxPnaAhVejltRyAs98GJnJC
++YoGPoBFFHUfFRcyPAzf6k4OzuoITFZAYYly9csmbZq4RtXb7Ww7SoBXD7xJ7wdS
+osOWTODokRYAyaP2AhZAM3IHH3EXbOF93mkOFLJmmBvTDZz1me7cyw1y7wIDAQAB
+AoGAHB6VNAHt9Ijr5h037b8ZPQ/4BZqVI5mWkJIXLBEcLTJDcJD7UD+xaHYDqpqS
+wf3vluTG9mhUtKQ7ri1X1VBVxTXUEY+NHeh0EKlfP5/2ZFi5MNqOqUJVfi37GoJj
+j/X76gEN3xeVg17jyGxP1yQZNMT+XjMW/RTSOG5MDzLKhoECQQDzLSB/5+ihf5xA
+lhHH9Bg64RnZ0667V51pCOEs/QT8uWtsMlEr1CXkCixX8C5fGzAGZsizqvD3MWmt
+H5A9BQXbAkEA7UkgXfWFU52abrfSXUl6+gF2mnooodMoX8u9Ux/seOGGK+/z3mRs
+3f78nPM00nSqguzU9E9P7t1a0B0HdK31fQJAUlcSbRzqkVyzXM8zwB/v4Gf+J9rc
+jITzQPCHxoL6IFTsgdtbztpr5hZnw3MJUJzVGyXMicG1DA6ION26Kl88BwJBAIaX
+BOHmonJUIcWNRKgfRr7J17E1exiXAf6cPM4KfIHwQb9oQmYxhkLBIB4SITMCc7kB
+hqTw28D8E0eaP6FiDq0CQFjYaLfRiZWE3y1vYpB9snbBMF+lqJ5cCjR+ScfVkUGN
+xPbnCdMayTQm9jRVORgD/o/iGKaoPjvN+REqSg6zY+E=
+-----END RSA PRIVATE KEY-----'
+);
+
+/*
 $mixin_code = $_SESSION['code'];
 $person = $_SESSION['person'];
 $url = 'https://api.mixin.one/oauth/token';
@@ -41,6 +69,25 @@ if ($result === FALSE) {
 }
 curl_close($ch);
 $array_mix = json_decode($result);
+*/
+$u_name = $_SESSION['full_name'];
+$u_id = $_SESSION['user_id'];
+$message = 'Hello, '.$u_name.'! You booked MI A2 LITE house. Thank you for using MixinKeys! Your password for unlock: 11111111';
+
+$mixinSdk = new \ExinOne\MixinSDK\MixinSDK();
+// use setConfig method to save config
+$mixinSdk->setConfig('myConfig-A',$config0);
+//$mixinSdk->use('myConfig-A')->network()->createConversations('CONTACT', [
+//            [
+//                'action'  => 'ADD',
+//                'role'    => '',
+//                'user_id' => $u_id,
+//            ],
+//        ]);
+
+$mixinSdk->use('myConfig-A')->message()->sendBatchMessage([''.$u_id.'',], ['Hello, '.$u_name.'! You booked MI A2 LITE house. Thank you for using MixinKeys! Your password for unlock: 11111111',]);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -59,16 +106,16 @@ $array_mix = json_decode($result);
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
-  <link href="../assets/css/material-kit.css?v=2.0.5" rel="stylesheet" />
+  <link href="assets/css/material-kit.css?v=2.0.5" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="../assets/demo/demo.css" rel="stylesheet" />
+  <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 
 <body class="profile-page sidebar-collapse">
   <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="https://demos.creative-tim.com/material-kit/index.html">
+        <a class="navbar-brand" href="#">
           MixinKeys </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="sr-only">Toggle navigation</span>
@@ -85,30 +132,30 @@ $array_mix = json_decode($result);
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)" onclick="scrollToDownload()">
+            <a class="nav-link" target="_blank" href="https://github.com/if1242/MixinKeys/blob/master/MixinKeys%20-%20white%20paper.pdf" >
               <i class="material-icons">cloud_download</i> White paper
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank" data-original-title="Follow us on github">
-              <i class="fa fa-twitter"></i>
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://github.com/if1242/MixinKeys" target="_blank" data-original-title="Follow us on github">
+              <i class="fa fa-github"></i>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/CreativeTim" target="_blank" data-original-title="Like us on youtube">
-              <i class="fa fa-facebook-square"></i>
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://youtu.be/TyIUbuKu_OY" target="_blank" data-original-title="Like us on youtube">
+              <i class="fa fa-youtube-play"></i>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com/CreativeTimOfficial" target="_blank" data-original-title="Vimeo">
-              <i class="fa fa-instagram"></i>
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://vimeo.com/309406253" target="_blank" data-original-title="Vimeo">
+              <i class="fa fa-vimeo"></i>
             </a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  <div class="page-header header-filter" data-parallax="true" style="background-image: url('assets/img/city-profile.jpg');"></div>
+  <div class="page-header header-filter" data-parallax="true" style="background-image: url('assets/img/account.jpg');"></div>
   <div class="main main-raised">
     <div class="profile-content">
       <div class="container">
@@ -116,13 +163,13 @@ $array_mix = json_decode($result);
           <div class="col-md-6 ml-auto mr-auto">
             <div class="profile">
               <div class="name">
-                <h3 class="title" style="color:#fff;">Success</h3>
+                <h3 class="title" style="color:#fff;">Success!</h3>
               </div>
             </div>
           </div>
         </div>
         <div class="description text-center">
-          <p><?php echo $array_mix->data->full_name; ?></p>
+          <p><?php $u_name; ?></p>
         </div>
         <div class="row">
           <div class="col-md-6 ml-auto mr-auto">
@@ -147,18 +194,18 @@ $array_mix = json_decode($result);
     </div>
   </footer>
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/jquery.min.js" type="text/javascript"></script>
-  <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
-  <script src="../assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
-  <script src="../assets/js/plugins/moment.min.js"></script>
+  <script src="assets/js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+  <script src="assets/js/plugins/moment.min.js"></script>
   <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
-  <script src="../assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+  <script src="assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
   <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <script src="../assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+  <script src="assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
   <!--  Google Maps Plugin    -->
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/material-kit.js?v=2.0.5" type="text/javascript"></script>
+  <script src="assets/js/material-kit.js?v=2.0.5" type="text/javascript"></script>
 </body>
 
 </html>
